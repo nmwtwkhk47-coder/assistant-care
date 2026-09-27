@@ -1,1 +1,693 @@
+<!DOCTYPE html>
 
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Assistant Care</title>
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+      font-family: Arial, sans-serif;
+
+    }
+
+    body {
+
+      margin: 0;
+
+      background: #f4f8fb;
+
+      color: #17324d;
+
+    }
+
+    .header {
+
+      background: linear-gradient(135deg, #159bd7, #0878bd);
+
+      color: white;
+
+      padding: 28px 20px 35px;
+
+      border-radius: 0 0 28px 28px;
+
+    }
+
+    .header h1 {
+
+      margin: 0;
+
+      font-size: 30px;
+
+    }
+
+    .header p {
+
+      margin: 8px 0 0;
+
+      font-size: 16px;
+
+      opacity: .95;
+
+    }
+
+    .container {
+
+      padding: 20px;
+
+      max-width: 600px;
+
+      margin: auto;
+
+    }
+
+    .welcome {
+
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 20px;
+
+      margin-top: -15px;
+
+      box-shadow: 0 5px 18px rgba(0,0,0,.08);
+
+    }
+
+    .welcome h2 {
+
+      margin-top: 0;
+
+      color: #0878bd;
+
+    }
+
+    .welcome p {
+
+      color: #64748b;
+
+      line-height: 1.7;
+
+    }
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 14px;
+
+      margin-top: 20px;
+
+    }
+
+    .card {
+
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 20px 12px;
+
+      text-align: center;
+
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+
+      cursor: pointer;
+
+      transition: .2s;
+
+    }
+
+    .card:active {
+
+      transform: scale(.97);
+
+    }
+
+    .icon {
+
+      font-size: 38px;
+
+      margin-bottom: 8px;
+
+    }
+
+    .card h3 {
+
+      margin: 5px 0;
+
+      font-size: 17px;
+
+      color: #17324d;
+
+    }
+
+    .card p {
+
+      margin: 5px 0 0;
+
+      font-size: 12px;
+
+      color: #7b8794;
+
+    }
+
+    .section {
+
+      display: none;
+
+      margin-top: 20px;
+
+    }
+
+    .section.active {
+
+      display: block;
+
+    }
+
+    .back {
+
+      border: none;
+
+      background: #0878bd;
+
+      color: white;
+
+      padding: 12px 20px;
+
+      border-radius: 12px;
+
+      font-size: 16px;
+
+      margin-bottom: 15px;
+
+    }
+
+    .box {
+
+      background: white;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      margin-bottom: 15px;
+
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+
+    }
+
+    input {
+
+      width: 100%;
+
+      padding: 14px;
+
+      margin: 8px 0;
+
+      border: 1px solid #d7e1e8;
+
+      border-radius: 12px;
+
+      font-size: 16px;
+
+      outline: none;
+
+    }
+
+    .button {
+
+      width: 100%;
+
+      border: none;
+
+      background: #159bd7;
+
+      color: white;
+
+      padding: 14px;
+
+      border-radius: 12px;
+
+      font-size: 16px;
+
+      margin-top: 8px;
+
+    }
+
+    .result {
+
+      margin-top: 12px;
+
+      padding: 12px;
+
+      border-radius: 12px;
+
+      background: #eef7fc;
+
+      line-height: 1.7;
+
+    }
+
+    .note {
+
+      font-size: 12px;
+
+      color: #7b8794;
+
+      line-height: 1.6;
+
+    }
+
+    .title {
+
+      color: #0878bd;
+
+      margin-top: 0;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- الصفحة الرئيسية -->
+
+  <div id="home">
+
+    <div class="header">
+
+      <h1>Assistant Care 💙</h1>
+
+      <p>صحة وتنظيم العائلة في مكان واحد</p>
+
+    </div>
+
+    <div class="container">
+
+      <div class="welcome">
+
+        <h2>أهلاً بيك 👋</h2>
+
+        <p>
+
+          Assistant Care يساعدك في تنظيم بعض معلومات واحتياجات الأسرة
+
+          بطريقة بسيطة وسهلة.
+
+        </p>
+
+      </div>
+
+      <div class="grid">
+
+        <div class="card" onclick="openSection('pressure')">
+
+          <div class="icon">🩺</div>
+
+          <h3>ضغط وسكر</h3>
+
+          <p>تسجيل القياسات</p>
+
+        </div>
+
+        <div class="card" onclick="openSection('reminders')">
+
+          <div class="icon">⏰</div>
+
+          <h3>المنبه</h3>
+
+          <p>تذكيرات الأدوية والمواعيد</p>
+
+        </div>
+
+        <div class="card" onclick="openSection('family')">
+
+          <div class="icon">👨‍👩‍👧‍👦</div>
+
+          <h3>تنظيم الأسرة</h3>
+
+          <p>تنظيم أفراد الأسرة</p>
+
+        </div>
+
+        <div class="card" onclick="openSection('labs')">
+
+          <div class="icon">📋</div>
+
+          <h3>التحاليل</h3>
+
+          <p>تسجيل الملاحظات والنتائج</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ضغط وسكر -->
+
+  <div id="pressure" class="section">
+
+    <div class="container">
+
+      <button class="back" onclick="goHome()">← الرئيسية</button>
+
+      <div class="box">
+
+        <h2 class="title">🩺 ضغط وسكر</h2>
+
+        <h3>ضغط الدم</h3>
+
+        <input id="high" type="number" placeholder="الضغط العلوي">
+
+        <input id="low" type="number" placeholder="الضغط السفلي">
+
+        <button class="button" onclick="checkPressure()">
+
+          فحص القراءة
+
+        </button>
+
+        <div id="pressureResult" class="result"></div>
+
+        <hr>
+
+        <h3>سكر الدم</h3>
+
+        <input id="sugar" type="number" placeholder="أدخل قراءة السكر">
+
+        <button class="button" onclick="checkSugar()">
+
+          فحص القراءة
+
+        </button>
+
+        <div id="sugarResult" class="result"></div>
+
+        <p class="note">
+
+          هذه النتائج للتنظيم والتوعية فقط وليست تشخيصًا طبيًا.
+
+          تختلف التفسيرات حسب العمر ووقت القياس والحالة الصحية.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- المنبه -->
+
+  <div id="reminders" class="section">
+
+    <div class="container">
+
+      <button class="back" onclick="goHome()">← الرئيسية</button>
+
+      <div class="box">
+
+        <h2 class="title">⏰ المنبه</h2>
+
+        <input id="medicine" type="text" placeholder="اسم الدواء">
+
+        <input id="time" type="time">
+
+        <button class="button" onclick="addReminder()">
+
+          إضافة تذكير
+
+        </button>
+
+        <div id="reminderList" class="result">
+
+          لا توجد تذكيرات حتى الآن.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- تنظيم الأسرة -->
+
+  <div id="family" class="section">
+
+    <div class="container">
+
+      <button class="back" onclick="goHome()">← الرئيسية</button>
+
+      <div class="box">
+
+        <h2 class="title">👨‍👩‍👧‍👦 تنظيم الأسرة</h2>
+
+        <input id="member" type="text" placeholder="اسم فرد من الأسرة">
+
+        <button class="button" onclick="addMember()">
+
+          إضافة فرد
+
+        </button>
+
+        <div id="familyList" class="result">
+
+          لم تتم إضافة أفراد بعد.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- التحاليل -->
+
+  <div id="labs" class="section">
+
+    <div class="container">
+
+      <button class="back" onclick="goHome()">← الرئيسية</button>
+
+      <div class="box">
+
+        <h2 class="title">📋 التحاليل</h2>
+
+        <input id="analysis" type="text"
+
+               placeholder="اسم التحليل أو الملاحظة">
+
+        <input id="analysisResult" type="text"
+
+               placeholder="النتيجة">
+
+        <button class="button" onclick="addAnalysis()">
+
+          حفظ النتيجة
+
+        </button>
+
+        <div id="analysisList" class="result">
+
+          لا توجد نتائج محفوظة.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+
+  function openSection(id) {
+
+    document.getElementById("home").style.display = "none";
+
+    document.querySelectorAll(".section").forEach(function(section) {
+
+      section.classList.remove("active");
+
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    window.scrollTo(0, 0);
+
+  }
+
+  function goHome() {
+
+    document.querySelectorAll(".section").forEach(function(section) {
+
+      section.classList.remove("active");
+
+    });
+
+    document.getElementById("home").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+  }
+
+  function checkPressure() {
+
+    let high = Number(document.getElementById("high").value);
+
+    let low = Number(document.getElementById("low").value);
+
+    let result = document.getElementById("pressureResult");
+
+    if (!high || !low) {
+
+      result.innerHTML = "من فضلك أدخل القراءتين.";
+
+      return;
+
+    }
+
+    result.innerHTML =
+
+      "تم تسجيل الضغط: " + high + " / " + low +
+
+      "<br>للتفسير الطبي الدقيق، يعتمد الحكم على العمر والحالة الصحية وتكرار القياسات.";
+
+  }
+
+  function checkSugar() {
+
+    let sugar = Number(document.getElementById("sugar").value);
+
+    let result = document.getElementById("sugarResult");
+
+    if (!sugar) {
+
+      result.innerHTML = "من فضلك أدخل قراءة السكر.";
+
+      return;
+
+    }
+
+    result.innerHTML =
+
+      "تم تسجيل قراءة السكر: " + sugar +
+
+      "<br>تفسير القراءة يعتمد على توقيت القياس والحالة الصحية.";
+
+  }
+
+  function addReminder() {
+
+    let medicine = document.getElementById("medicine").value;
+
+    let time = document.getElementById("time").value;
+
+    if (!medicine || !time) {
+
+      alert("اكتب اسم الدواء والوقت.");
+
+      return;
+
+    }
+
+    document.getElementById("reminderList").innerHTML =
+
+      "💊 " + medicine +
+
+      "<br>⏰ الساعة: " + time;
+
+    document.getElementById("medicine").value = "";
+
+    document.getElementById("time").value = "";
+
+  }
+
+  function addMember() {
+
+    let member = document.getElementById("member").value;
+
+    if (!member) {
+
+      alert("اكتب اسم فرد من الأسرة.");
+
+      return;
+
+    }
+
+    let list = document.getElementById("familyList");
+
+    if (list.innerHTML.includes("لم تتم إضافة")) {
+
+      list.innerHTML = "";
+
+    }
+
+    list.innerHTML += "👤 " + member + "<br><br>";
+
+    document.getElementById("member").value = "";
+
+  }
+
+  function addAnalysis() {
+
+    let name = document.getElementById("analysis").value;
+
+    let resultText = document.getElementById("analysisResult").value;
+
+    if (!name || !resultText) {
+
+      alert("اكتب اسم التحليل والنتيجة.");
+
+      return;
+
+    }
+
+    let list = document.getElementById("analysisList");
+
+    if (list.innerHTML.includes("لا توجد نتائج")) {
+
+      list.innerHTML = "";
+
+    }
+
+    list.innerHTML +=
+
+      "📌 " + name +
+
+      "<br>النتيجة: " + resultText +
+
+      "<br><br>";
+
+    document.getElementById("analysis").value = "";
+
+    document.getElementById("analysisResult").value = "";
+
+  }
+
+</script>
+
+</body>
+
+</html>
